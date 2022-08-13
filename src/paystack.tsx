@@ -38,6 +38,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
   }, []);
 
   useEffect(() => {
+    console.log('initializing payment');
     const options = [];
     if(metaData) {
       for (let key in metaData) {
@@ -119,6 +120,11 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
 
   const messageReceived = (data: string) => {
     const webResponse = JSON.parse(data);
+
+    console.log('webResponse', webResponse);
+    console.log('***********************');
+    console.log('***********************');
+    console.log('webResponse event', webResponse.event);
     if (handleWebViewMessage) {
       handleWebViewMessage(data);
     }
@@ -150,7 +156,9 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
   };
 
   const onNavigationStateChange = (state: WebViewNavigation) => {
+    console.log('STATE', state);
     const { url } = state;
+    console.log('URL', url);
     if (url === CLOSE_URL) {
       setshowModal(false);
     }
